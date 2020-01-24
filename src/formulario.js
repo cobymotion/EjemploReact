@@ -10,12 +10,31 @@ class Formulario extends Component{
           apellidos:"",
           edad:"",
           curp:"",
+          arrayDatos:[],
         }
         this.handleClick = this.handleClick.bind(this); 
         this.handleChange = this.handleChange.bind(this); 
       }
     
-      handleClick() {} 
+      handleClick() {
+
+        if(this.state.nombre!=="" && this.state.curp!=="" && this.state.apellidos!=="" && this.state.edad!==""){
+        var objForm = {
+          nombre : this.state.nombre,
+          apellido: this.state.apellidos,
+          curp: this.state.curp,
+          edad:this.state.edad  
+        }
+
+        var objFormString = JSON.stringify(objForm); 
+        this.state.arrayDatos.push(objFormString);
+
+        localStorage.setItem("datos",this.state.arrayDatos);        
+      } else
+        {alert('Datos incompletos');
+        
+        }
+      } 
     
       handleChange(evt){
     
@@ -32,34 +51,32 @@ class Formulario extends Component{
         
       render() {
         return (
-          <div className="div-principal">
-            <form>
+          <div className="div-principal">            
               <div className="header-img">
                 <img src={logo} className="App-logo logo-tec" alt="logo" />
               </div>
               <h1>PRIMER PRACTICA</h1>
               <p>Primer practica del curso de react.js Unidad Academica Tequila</p>
-              <div className="div-input" id="nombre">
+              <div className="div-input">
                 <label>Nombre: </label>
                 <input value={this.state.nombre} name="nombre" type="text" onChange={this.handleChange.bind(this)} placeholder="Nombre" className="input-text" />
               </div>
-              <div className="div-input" id="apellidos">
+              <div className="div-input" >
                 <span><label>Apellidos: </label></span>
                 <input value={this.state.apellidos} name="apellidos" type="text" onChange={this.handleChange.bind(this)} placeholder="Apellidos" className="input-text" />
               </div>
-              <div className="div-input" id="edad">
+              <div className="div-input" >
               <label>Edad: </label>
                 <input value={this.state.edad} name="edad" type="text" onChange={this.handleChange.bind(this)} placeholder="Edad" className="input-text" />
               </div>
-              <div className="div-input" id="curp">
+              <div className="div-input" >
               <label>Curp: </label>
                 <input value={this.state.curp} name="curp" type="text" onChange={this.handleChange.bind(this)} placeholder="Curp" className="input-text"/>
               </div>
               <div>
-                <button className="input-buttons" id="btn-guardar">Guardar</button>
+                <button onClick={this.handleClick.bind(this)}  className="input-buttons" id="btn-guardar">Guardar</button>
                 <button className="input-buttons" id="btn-cancelar">Borrar</button>
-              </div>
-            </form>
+              </div>            
           </div>
         );
       }

@@ -1,10 +1,32 @@
 import React, {Component} from 'react';
+import './formulario.css'
 
-class Datos extends Component{
-    render() {
+class Datos extends Component{  
+    
+      constructor(props)
+      {
+        super(props);
+        this.state = {
+          datos:""
+        }
+      }
+      componentDidMount(){
+        var datosLocal = JSON.parse(localStorage.getItem("datos"));
+        this.setState({
+          datos:datosLocal
+        })
+      }
+      
+      render() {
         return (
-          <div>
-              <h1>PRUEBA</h1>
+          <div className="div-principal">
+            <ul>
+              {
+                this.state.datos.map((it)=>(
+                <li>{it.nombre}</li>
+                ))
+              }
+            </ul>              
           </div>
         );
       }
