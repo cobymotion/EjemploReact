@@ -29,7 +29,7 @@ class Formulario extends Component{
         var objFormString = JSON.stringify(objForm); 
         this.state.arrayDatos.push(objFormString);
 
-        localStorage.setItem("datos",this.state.arrayDatos);        
+        localStorage.setItem("datos",JSON.stringify(this.state.arrayDatos));        
       } else
         {alert('Datos incompletos');
         

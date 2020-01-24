@@ -10,10 +10,22 @@ class Datos extends Component{
           datos:""
         }
       }
-      componentDidMount(){
+      UNSAFE_componentWillMount(){
+        var arrayDatos  = []
         var datosLocal = JSON.parse(localStorage.getItem("datos"));
+        console.log(typeof(datosLocal))
+        console.log(datosLocal)
+        datosLocal.map((it,index)=>(
+          arrayDatos.push(JSON.parse(it))
+        ));
+
+       /* for(var i=0; i<datosLocal.legth;i++)
+          arrayDatos.push(JSON.parse(datosLocal));*/
+        
+        console.log(arrayDatos)
+
         this.setState({
-          datos:datosLocal
+          datos:arrayDatos
         })
       }
       
@@ -22,8 +34,8 @@ class Datos extends Component{
           <div className="div-principal">
             <ul>
               {
-                this.state.datos.map((it)=>(
-                <li>{it.nombre}</li>
+                this.state.datos.map((it,index)=>(
+                <li key={index}>{it.nombre}</li>
                 ))
               }
             </ul>              
