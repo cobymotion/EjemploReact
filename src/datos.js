@@ -35,7 +35,7 @@ class Datos extends Component{
             <ul>
               {
                 this.state.datos.map((it,index)=>(
-                <li key={index}>{it.nombre}</li>
+      <li key={index}>{it.nombre} {it.apellidos} {it.edad}</li>
                 ))
               }
             </ul>              
